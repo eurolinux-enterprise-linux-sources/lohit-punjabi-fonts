@@ -3,7 +3,7 @@
 
 Name:           %{fontname}-fonts
 Version:        2.4.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Free Punjabi font
 
 Group:          User Interface/X
@@ -15,6 +15,7 @@ BuildArch:      noarch
 BuildRequires: fontforge >= 20080429
 BuildRequires:  fontpackages-devel
 Requires:       fontpackages-filesystem
+Patch1: bug-691294.patch
 Obsoletes: lohit-fonts-common < %{version}-%{release}
 
 %description
@@ -23,6 +24,7 @@ This package provides a free Punjabi truetype/opentype font.
 
 %prep
 %setup -q -n %{fontname}-%{version} 
+%patch1 -p1 -b .1-rupee-sign
 
 %build
 ./generate.pe *.sfd
@@ -52,6 +54,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Wed Jun 06 2011 Pravin Satpute <psatpute@redhat.com> - 2.4.4-2
+- Resolves: bug 691294
+
 * Thu Apr 15 2010 Pravin Satpute <psatpute@redhat.com> - 2.4.4-1
 - Resolves: bug 582156
 
